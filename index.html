@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<!-- <script>
+		var startTime = Date.now();
+	</script> -->
+	<meta charset="UTF-8">
+	<title>Школа приключений «Лучники»</title>
+	<script>
+		function loadFont(a,b,c,d){function e(){if(!window.FontFace)return!1;var a=new FontFace("t",'url("data:application/font-woff2,") format("woff2")',{}),b=a.load();try{b.then(null,function(){})}catch(c){}return"loading"===a.status}var f=navigator.userAgent,g=!window.addEventListener||f.match(/(Android (2|3|4.0|4.1|4.2|4.3))|(Opera (Mini|Mobi))/)&&!f.match(/Chrome/);if(!g){var h={};try{h=localStorage||{}}catch(i){}var j="x-font-"+a,k=j+"url",l=j+"css",m=h[k],n=h[l],o=document.createElement("style");if(o.rel="stylesheet",document.head.appendChild(o),!n||m!==b&&m!==c){var p=c&&e()?c:b,q=new XMLHttpRequest;q.open("GET",p),q.onload=function(){q.status>=200&&q.status<400&&(h[k]=p,h[l]=q.responseText,d||(o.textContent=q.responseText))},q.send()}else o.textContent=n}};
+		loadFont('fonts', 'css/fonts-woff.css');
+	</script>
+	<style>
+		/*.page_header{background:url(img/_MG_9243.jpg) center/cover fixed #959595}*/
+		.page_header{background:url(img/bg_header_1920.jpg) center/cover fixed #959595}
+		.page_header:before{background:url(img/bg_header_1920_mini.jpg) center/cover fixed}
+		.page_header.blured:before{opacity:1}
+		.timer.lazy{background: none;}
+		.timer{background:url(img/bg_timer_1920.jpg) fixed center top/cover #959595}
+		@media screen and (max-width:1380px){
+			/*.page_header{background-image:url(img/_MG_9243.jpg)}*/
+			.page_header{background-image:url(img/bg_header_1366.jpg)}
+			.page_header:before{background-image:url(img/bg_header_1366_mini.jpg)}
+			.timer{background-image:url(img/bg_timer_1366.jpg)}
+		}
+		@media screen and (max-width:767px){
+			.page_header{background-image:url(img/bg_header_767.jpg)}
+			.timer{background-image:url(img/bg_timer_767.jpg)}
+		}
+		@media screen and (max-width:479px){
+			.page_header{background-image:url(img/bg_header_479.jpg)}
+			.timer{background-image:url(img/bg_timer_479.jpg)}
+		}
+	</style>
+	<link rel="stylesheet" href="css/header.css">
+	<link rel="preload" href="css/style.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+	<noscript><link rel="stylesheet" href="css/style.css"></noscript>
+	<script>
+		!function(n){"use strict";n.loadCSS||(n.loadCSS=function(){});var o=loadCSS.relpreload={};if(o.support=function(){var e;try{e=n.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),o.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},o.poly=function(){if(!o.support())for(var t=n.document.getElementsByTagName("link"),e=0;e<t.length;e++){var a=t[e];"preload"!==a.rel||"style"!==a.getAttribute("as")||a.getAttribute("data-loadcss")||(a.setAttribute("data-loadcss",!0),o.bindMediaToggle(a))}},!o.support()){o.poly();var t=n.setInterval(o.poly,500);
+		n.addEventListener?n.addEventListener("load",function(){o.poly(),n.clearInterval(t)}):n.attachEvent&&n.attachEvent("onload",function(){o.poly(),n.clearInterval(t)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:n.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+	</script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+	<svg style="position: absolute;">
+		<defs>
+			<filter id="contour" x="-0.5" y="-0.5" width="200%" height="200%">
+				<feGaussianBlur in="SourceAlpha" stdDeviation="2" result="blur"></feGaussianBlur>
+				<feOffset in="blur" dx="1" dy="1" result="offsetblur1"></feOffset>
+				<feOffset in="blur" dx="-1" dy="1" result="offsetblur2"></feOffset>
+				<feOffset in="blur" dx="-1" dy="-1" result="offsetblur3"></feOffset>
+				<feOffset in="blur" dx="1" dy="-1" result="offsetblur4"></feOffset>
+				<feComposite in="SourceGraphic" in2="offsetblur1" operator="over"></feComposite>
+				<feComposite in2="offsetblur2" operator="over"></feComposite>
+				<feComposite in2="offsetblur3" operator="over"></feComposite>
+				<feComposite in2="offsetblur4" operator="over"></feComposite>
+			</filter>
+		</defs>
+	</svg>
+	
+	<script type="text/javascript">
+		var ajax = new XMLHttpRequest();
+		ajax.open("GET", "img/sprite.svg", true);
+		ajax.send();
+		ajax.onload = function() {
+			var div = document.createElement("div");
+			div.innerHTML = ajax.responseText;
+			div.style.display = 'none';
+			document.body.insertBefore(div, document.body.firstChild);
+		}
+	</script>
+
+	<header id="page_header" class="page_header blured">
+		<div class="headline">
+			<div class="s_content">
+				<a class="logo" href="./">
+					<svg class="icon icon-logo">
+						<use xlink:href="#logo"></use>
+					</svg>
+				</a>
+				<div class="menu">
+					<div class="menu_scroll">
+						<div class="menu_toggle">
+							<div class="menu_icon hamb"></div>
+						</div>
+						<div class="menu_list">
+							<span class="menu_link" data-href="#about">О нас</span>
+							<span class="menu_link" data-href="#offer">Семинары и походы</span>
+							<span class="menu_link" data-href="#fest">Фестивали</span>
+							<span class="menu_link" data-href="#team">Команда</span>
+							<span class="menu_link" data-href="#rev">Отзывы</span>
+							<span class="menu_link" data-href="#contacts">Контакты</span>
+						</div>
+					</div>
+					<button class="btn">Сайт 2</button>
+					<button class="btn head_btn">Сайт 3</button>
+				</div>
+			</div>
+		</div>
+		<h1>Школа приключений «Лучники»</h1>
+		<h3>Интересный и полезный отдых ваших детей</h3>
+	</header>
+	<script>
+		function bg_fade() {
+			setTimeout(function() {
+				document.getElementById('page_header').classList.remove('blured');
+			},0);
+		};
+		var docWidth = document.documentElement.clientWidth;
+
+		if(docWidth > 767) {
+			var img = document.createElement('img');
+			if(docWidth > 1380) {
+				img.src = 'img/bg_header_1920.jpg';
+			} else {
+				img.src = 'img/bg_header_1366.jpg';
+			}
+			img.addEventListener('load', bg_fade);
+		} else {
+			bg_fade();
+		}
+	</script>
+
+	<section id="about" class="about">
+		<div class="s_content">
+			<h2 class="fadeInUp">О нас</h2>
+			<div class="row">
+				<div class="item vid fadeIn">
+					<div class="youtube" id="lVQge6QwArU" data-params="modestbranding=1&rel=0&showinfo=0"></div>
+				</div>
+				<div class="item txt fadeInUp">
+					<p>Школа Приключений «Лучники» организует детский летний отдых с походами по горам, сплавами по горным рекам и проживанием в палаточном лагере.</p>
+					<p>В нашей Школе очень простой быт: мы спим в палатках, пищу готовим на костре, купаемся в горной реке, пьем родниковую воду. Именно такие условия наилучшим образом способствуют развитию в детях таких важных качеств как самостоятельность, ответственность, любовь к труду и природе.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="photo" class="photo">
+		<h2>Фотогалерея</h2>
+		<ul class="photo_list">
+			<li data-src="img/gallery/001.jpg"><a href=""><img class="lazy" src="/" data-src="img/thumb/thumb_001.jpg" alt=""></a></li>
+			<li data-src="img/gallery/002.jpg"><a href=""><img class="lazy" src="/" data-src="img/thumb/thumb_002.jpg" alt=""></a></li>
+			<li data-src="img/gallery/003.jpg"><a href=""><img class="lazy" src="/" data-src="img/thumb/thumb_003.jpg" alt=""></a></li>
+			<li data-src="img/gallery/004.jpg"><a href=""><img class="lazy" src="/" data-src="img/thumb/thumb_004.jpg" alt=""></a></li>
+			<li data-src="img/gallery/005.jpg"><a href=""><img class="lazy" src="/" data-src="img/thumb/thumb_005.jpg" alt=""></a></li>
+			<li data-src="img/gallery/006.jpg"><a href=""><img class="lazy" src="/" data-src="img/thumb/thumb_006.jpg" alt=""></a></li>
+			<li data-src="img/gallery/007.jpg"><a href=""><img class="lazy" src="/" data-src="img/thumb/thumb_007.jpg" alt=""></a></li>
+			<li data-src="img/gallery/008.jpg"><a href=""><img class="lazy" src="/" data-src="img/thumb/thumb_008.jpg" alt=""></a></li>
+			<li data-src="img/gallery/009.jpg"><a href=""><img class="lazy" src="/" data-src="img/thumb/thumb_009.jpg" alt=""></a></li>
+			<li data-src="img/gallery/010.jpg"><a href=""><img class="lazy" src="/" data-src="img/thumb/thumb_010.jpg" alt=""></a></li>
+			<li data-src="img/gallery/011.jpg"><a href=""><img class="lazy" src="/" data-src="img/thumb/thumb_011.jpg" alt=""></a></li>
+			<li data-src="img/gallery/012.jpg"><a href=""><img class="lazy" src="/" data-src="img/thumb/thumb_012.jpg" alt=""></a></li>
+			<li data-src="img/gallery/013.jpg"><a href=""><img class="lazy" src="/" data-src="img/thumb/thumb_013.jpg" alt=""></a></li>
+			<li data-src="img/gallery/014.jpg"><a href=""><img class="lazy" src="/" data-src="img/thumb/thumb_014.jpg" alt=""></a></li>
+		</ul>
+	</section>
+
+	<section id="offer" class="offer">
+		<div class="s_content">
+			<div class="seminars">
+				<h2 class="fadeInUp">Семинары</h2>
+				<div class="item">
+					<img class="lazy" src="/" data-src="img/image.png" alt="">
+					<div class="desc">
+						<h4 class="fadeInUp">Семинар 1</h4>
+						<h5 class="more fadeInUp" data-href="details_seminar1">подробнее...</h5>
+						<button class="btn check_btn fadeInUp" data-check="check_seminar1">Участвовать</button>
+
+					</div>
+				</div>
+				<div class="item">
+					<img class="lazy" src="/" data-src="img/image.png" alt="">
+					<div class="desc">
+						<h4 class="fadeInUp">Семинар 2</h4>
+						<h5 class="more fadeInUp" data-href="details_seminar2">подробнее...</h5>
+						<button class="btn check_btn fadeInUp" data-check="check_seminar2">Участвовать</button>
+					</div>
+				</div>
+			</div>
+			<div class="hiking">
+				<h2 class="fadeInUp">Походы</h2>
+				<div class="item">
+					<img class="lazy" src="/" data-src="img/image.png" alt="">
+					<div class="desc">
+						<h4 class="fadeInUp">Поход 1</h4>
+						<h5 class="more fadeInUp" data-href="details_hike1">подробнее...</h5>
+						<button class="btn check_btn fadeInUp" data-check="check_hike1">Участвовать</button>
+					</div>
+				</div>
+				<div class="item">
+					<img class="lazy" src="/" data-src="img/image.png" alt="">
+					<div class="desc">
+						<h4 class="fadeInUp">Поход 2</h4>
+						<h5 class="more fadeInUp" data-href="details_hike2">подробнее...</h5>
+						<button class="btn check_btn fadeInUp" data-check="check_hike2">Участвовать</button>
+					</div>
+				</div>
+				<div class="item">
+					<img class="lazy" src="/" data-src="img/image.png" alt="">
+					<div class="desc">
+						<h4 class="fadeInUp">Поход 3</h4>
+						<h5 class="more fadeInUp" data-href="details_hike3">подробнее...</h5>
+						<button class="btn check_btn fadeInUp" data-check="check_hike3">Участвовать</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+	<section id="fest" class="fest">
+		<div class="s_content">
+			<h2 class="fadeInUp">Наши фестивали</h2>
+			<div class="item">
+				<img src="img/image.png" alt="">
+				<div class="fest_desc">
+					<h4>Фестиваль 1</h4>
+					<p>Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты. Жаренные бросил за не, буквоград последний до послушавшись которое безорфографичный то гор, дал предложения даль она меня сих но назад продолжил он парадигматическая.</p>
+					<p>Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты. Агенство пояс использовало, даже бросил взобравшись. Эта грустный языкового меня!</p>
+					<button class="btn">Участвовать</button>
+				</div>
+			</div>
+			<div class="item">
+				<img src="img/image.png" alt="">
+				<div class="fest_desc">
+					<h4>Фестиваль 2</h4>
+					<p>Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты. Эта рекламных жаренные, родного строчка наш ipsum? Злых пустился точках курсивных, буквенных но, своего ему. Последний великий пунктуация они путь деревни это, дал переписывается грамматики переписали которой назад продолжил необходимыми.</p>
+					<button class="btn">Участвовать</button>
+				</div>
+			</div>
+			<div class="item">
+				<img src="img/image.png" alt="">
+				<div class="fest_desc">
+					<h4>Фестиваль 3</h4>
+					<p>Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты. Заманивший большого, скатился ручеек? Свою все свое последний не сих парадигматическая предупредила эта, продолжил предупреждал встретил маленькая, что щеке, взгляд если рекламных ведущими? Осталось буквоград ее путь необходимыми своих, раз все, свой. Жаренные большого решила великий ведущими ipsum большой грамматики текст раз ручеек, осталось, силуэт ты строчка текстов повстречался они.</p>
+					<button class="btn">Участвовать</button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="plus" class="plus">
+		<div class="s_content">
+			<h2 class="fadeInUp">Мы гарантируем вам</h2>
+			<div class="row">
+				<div class="item">
+					<svg class="icon icon-1_teacher">
+						<use xlink:href="#1_teacher"></use>
+					</svg>
+					<h4>Опыт и профессионализм</h4>
+					<p>С вашими детьми работают опытные педагоги и профессиональные инструкторы.</p>
+				</div>
+				<div class="item">
+					<svg class="icon icon-2_helmet">
+						<use xlink:href="#2_helmet"></use>
+					</svg>
+					<h4>Безопасность</h4>
+					<p>Мы обеспечиваем безопасность ваших детей в течение всей нашей программы.</p>
+				</div>
+				<div class="item">
+					<svg class="icon icon-3_key2">
+						<use xlink:href="#3_key"></use>
+					</svg>
+					<h4>Индивидуальный подход</h4>
+					<p>Ваш ребенок найдет себе достойное место в нашей большой дружной команде.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="exp" class="exp">
+		<div class="s_content">
+			<h2 class="fadeInUp">Наш опыт</h2>
+			<div class="row">
+				<div class="item">
+					<svg class="icon icon-circle">
+						<use xlink:href="#circle"></use>
+					</svg>
+					<div class="num">30</div>
+					<h4>Лет</h4>
+					<h5>опыта работы с детьми</h5>
+				</div>
+				<div class="item">
+					<svg class="icon icon-circle">
+						<use xlink:href="#circle"></use>
+					</svg>
+					<div class="num">50</div>
+					<h4>Программ</h4>
+					<h5>для детей разных возрастов</h5>
+				</div>
+				<div class="item">
+					<svg class="icon icon-circle">
+						<use xlink:href="#circle"></use>
+					</svg>
+					<div class="num">3000</div>
+					<h4>Детей</h4>
+					<h5>отдохнувших с нами</h5>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- <section id="place" class="place">
+		<div class="place_content">
+			<img class="lazy fadeIn" src="/" data-src="img/place.jpg" alt="">
+			<div class="part">
+				<h2 class="fadeInUp">Место проведения</h2>
+				<div class="txt fadeInUp">
+					<p>Палаточный лагерь Школы Приключений «ЛУЧНИКИ» расположен в эко поселении на тихой уединенной лесной поляне, в удалении от населенных пунктов и магазинов. Вблизи протекает горная река Цица, а Кавказский хребет и плато Лаго-Наки находится в пешей доступности. Все наши приключения проходят в красивейших местах Краснодарского края: в горах, лесу, среди пещер, водопадов, горных рек и лугов.</p>
+				</div>
+			</div>
+		</div>
+	</section> -->
+
+	<section id="team" class="team">
+		<div class="s_content">
+			<h2 class="fadeInUp">Наша команда</h2>
+			<h3 class="fadeInUp">Объединение неравнодушных родителей и опытных специалистов.</h3>
+			<div class="row">
+				<div class="item">
+					<img class="lazy" src="/" data-src="img/team.jpg" alt="">
+					<h4>Игорь Игоревич</h4>
+					<p>Профессиональный аниматор. Отец троих детей. Уже более 6 лет занимается организацией разного рода приключений, квестов и летних программ для детей.</p>
+				</div>
+				<div class="item">
+					<img class="lazy" src="/" data-src="img/team.jpg" alt="">
+					<h4>Николай Владимирович</h4>
+					<p>Педагог с 30-летним стажем работы с детьми и подростками. Организовал и провёл более 150 походов. Руководитель подросткового приключенческого клуба  на протяжении 15 лет. Инструктор-проводник пешеходного и водного туризма.</p>
+				</div>
+				<div class="item">
+					<img class="lazy" src="/" data-src="img/team.jpg" alt="">
+					<h4>Алиса Евгеньевна</h4>
+					<p>Профессиональный аниматор. Мать троих детей. С 2012 года работает в сфере детских праздников. Занимается организацией весёлых массовых мероприятий и досуга для детей.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section id="rev" class="rev">
+		<h2 class="fadeInUp">Отзывы</h2>
+		<div class="s_content">
+			<div class="item">
+				<a class="rev_link" href="https://youtu.be/LcKQeFAHXmA">
+					<img class="lazy" src="/" data-src="img/rev.jpg" alt="">
+				</a>
+				<h4>Ирина</h4>
+			</div>
+			<div class="item">
+				<a class="rev_link" href="https://youtu.be/7JWdeRhxUB0">
+					<img class="lazy" src="/" data-src="img/rev.jpg" alt="">
+				</a>
+				<h4>Сергей</h4>
+			</div>
+			<div class="item">
+				<a class="rev_link" href="https://youtu.be/-wh-L1ig55s">
+					<img class="lazy" src="/" data-src="img/rev.jpg" alt="">
+				</a>
+				<h4>Артём</h4>
+			</div>
+		</div>
+	</section>
+<!-- 
+	<section id="order">
+		<h2 class="fadeInUp">Заявка</h2>
+		<form id="order_form">
+			<input type="text" name="name" placeholder="ФИО">
+			<input type="tel" name="phone" placeholder="Телефон">
+			<input type="email" name="email" placeholder="Email">
+
+			<div class="offers_checkbox">
+				<div class="seminars_checkbox">
+					<h4>Семинары</h4>
+					<label class="checkbox">
+						<input class="check_seminar1" type="checkbox" name="seminars" value="Семинар 1">
+						<span class="checkbox_text">Семинар 1</span>
+					</label>
+					<label class="checkbox">
+						<input class="check_seminar2" type="checkbox" name="seminars" value="Семинар 2">
+						<span class="checkbox_text">Семинар 2</span>
+					</label>
+				</div>
+				<div class="hiking_checkbox">
+					<h4>Походы</h4>
+					<label class="checkbox">
+						<input class="check_hike1" type="checkbox" name="hiking" value="Поход 1">
+						<span class="checkbox_text">Поход 1</span>
+					</label>
+					<label class="checkbox">
+						<input class="check_hike2" type="checkbox" name="hiking" value="Поход 2">
+						<span class="checkbox_text">Поход 2</span>
+					</label>
+					<label class="checkbox">
+						<input class="check_hike3" type="checkbox" name="hiking" value="Поход 3">
+						<span class="checkbox_text">Поход 3</span>
+					</label>
+				</div>
+			</div>
+			<button class="btn">Оставить заявку</button>
+		</form>
+	</section> -->
+
+	<section id="contacts" class="contacts">
+		<div class="s_content">
+			<h2 class="fadeInUp">Контакты</h2>
+			<div class="row">
+				<div class="item recv">
+					<h6>Phone</h6>
+					<h4>+7 (988) 123-45-67</h4>
+					<h6>Email</h6>
+					<h4>ouremail@gmail.com</h4>
+					<form id="callback">
+						<h4>Заказать обратный звонок</h4>
+						<input type="text" name="name" placeholder="Ваше имя">
+						<input type="tel" name="phone" placeholder="Ваш телефон">
+						<button class="btn">Заказать звонок</button>
+					</form>
+				</div>
+				<div id="map" class="item fadeIn"></div>
+			</div>
+		</div>
+	</section>
+	
+	<footer id="page_footer" class="page_footer">
+		<div class="social">
+			<a href="https://vk.com/luch_niki" target="blank">
+				<svg class="icon icon-vk">
+					<use xlink:href="#vk"></use>
+				</svg>
+			</a>
+			<a href="https://www.facebook.com/Школа-приключений-216596072294321/" target="blank">
+				<svg class="icon icon-fb">
+					<use xlink:href="#fb"></use>
+				</svg>
+			</a>
+			<a href="https://www.instagram.com/shkola_luchniki/" target="blank">
+				<svg class="icon icon-instagram">
+					<use xlink:href="#instagram"></use>
+				</svg>
+			</a>
+		</div>
+		<h5>Copyright © 2017. All rights reserved.</h5>
+	</footer>
+
+	<a id="to_top" href="#top">
+		<svg class="icon icon-chevron_up">
+			<use xlink:href="#chevron_up"></use>
+		</svg>
+	</a>
+
+	<div style="display:none">
+		<div id="order">
+			<h2>Заявка</h2>
+			<form id="order_form">
+				<input type="text" name="name" placeholder="ФИО">
+				<input type="tel" name="phone" placeholder="Телефон">
+				<input type="email" name="email" placeholder="Email">
+	
+				<div class="offers_checkbox">
+					<div class="seminars_checkbox">
+						<h4>Семинары</h4>
+						<label class="checkbox">
+							<input class="check_seminar1" type="checkbox" name="seminars" value="Семинар 1">
+							<span class="checkbox_text">Семинар 1</span>
+						</label>
+						<label class="checkbox">
+							<input class="check_seminar2" type="checkbox" name="seminars" value="Семинар 2">
+							<span class="checkbox_text">Семинар 2</span>
+						</label>
+					</div>
+					<div class="hiking_checkbox">
+						<h4>Походы</h4>
+						<label class="checkbox">
+							<input class="check_hike1" type="checkbox" name="hiking" value="Поход 1">
+							<span class="checkbox_text">Поход 1</span>
+						</label>
+						<label class="checkbox">
+							<input class="check_hike2" type="checkbox" name="hiking" value="Поход 2">
+							<span class="checkbox_text">Поход 2</span>
+						</label>
+						<label class="checkbox">
+							<input class="check_hike3" type="checkbox" name="hiking" value="Поход 3">
+							<span class="checkbox_text">Поход 3</span>
+						</label>
+					</div>
+				</div>
+				<button class="btn">Оставить заявку</button>
+			</form>
+		</div>
+		<div>
+			<div id="details_seminar1">
+				<h4>Семинар 1</h4>
+				<div class="details_content">
+					<img class="lazy" src="/" data-src="img/image.png" alt="">
+					<div class="desc">
+						<p>Краткое описание первого семинара со ссылками и картинками</p>
+						<p>Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты. Текст моей всемогущая заманивший встретил злых своих толку образ за которое имеет текстов речью свой запятой живет взобравшись от всех, имени предупреждал! Злых переписывается повстречался они букв запятой, рекламных маленькая строчка маленький ручеек силуэт. Продолжил даже меня сих напоивший бросил до.</p>
+						<p>Океана страна решила мир за жизни! Путь, гор! Букв, свое жаренные? Бросил свою имеет подзаголовок назад? Они переулка текст назад текстами оксмокс пор страна, эта агентство текста, заголовок, безорфографичный правилами свой? Языком он рукописи, предупреждал вскоре но, дорогу это щеке гор на берегу, путь свой эта буквенных переписали до сих взобравшись одна моей использовало ее страну все образ! Точках послушавшись города толку силуэт. Переулка, правилами текста. Ему вершину, ведущими свой, рекламных домах свою семантика курсивных парадигматическая лучше снова даже агентство продолжил моей рот щеке скатился одна? Жаренные, меня его своих там толку свой рыбными злых заголовок послушавшись путь пунктуация имени власти вопрос, что гор точках залетают домах они лучше даже. Вопрос, страну рукописи лучше свою единственное коварных большого. Толку его себя дал эта жаренные собрал залетают текст переписали путь пояс букв все снова, жизни, реторический то от всех рукопись взобравшись злых сих. Мир родного буквенных одна послушавшись путь свой проектах по всей города языкового рукописи текст даль, журчит он себя назад текстов маленький реторический на берегу всемогущая сих свою меня. Реторический страна, текстов до вскоре вдали мир проектах даже напоивший несколько осталось если всемогущая строчка. Океана грустный несколько одна маленькая путь свое дорогу, курсивных не букв даже меня предложения злых щеке. Выйти деревни своего свой. Буквоград это ты он языком подзаголовок подпоясал океана наш, взобравшись своего вопроса выйти первую над диких они моей вопрос меня вскоре родного, прямо рекламных использовало? Что семь пустился прямо подпоясал буквоград, имеет мир страну вдали необходимыми реторический обеспечивает, жаренные единственное. Рыбного, деревни города имени оксмокс, вершину рот одна своего назад запятых, послушавшись журчит меня продолжил семантика составитель наш выйти ему. Языкового дороге даже что коварных. Залетают жизни сих парадигматическая над коварных до, дороге на берегу послушавшись рукопись города свой, великий от всех ее заманивший предложения строчка власти?</p>
+					</div>
+				</div>
+			</div>
+			<div id="details_seminar2">
+				<h4>Семинар 2</h4>
+				<div class="details_content">
+					<img class="lazy" src="/" data-src="img/image.png" alt="">
+					<div class="desc">
+						<p>Краткое описание второго семинара со ссылками и картинками</p>
+						<p>Продолжил, буквенных строчка родного сбить что алфавит рот грамматики щеке даже подзаголовок которое осталось заголовок снова предупредила всемогущая гор над назад? Грамматики, если правилами.</p>
+					</div>
+				</div>
+			</div>
+			<div id="details_hike1">
+				<h4>Поход 1</h4>
+				<div class="details_content">
+					<img class="lazy" src="/" data-src="img/image.png" alt="">
+					<div class="desc">
+						<p>Краткое описание первого похода со ссылками и картинками</p>
+						<p>Послушавшись скатился безопасную встретил города предупреждал языком парадигматическая строчка вдали, осталось последний речью, своих от всех имеет маленькая свой деревни повстречался вопрос текстами сих наш взгляд даль курсивных даже! Путь скатился буквенных назад по всей своего обеспечивает, дал переулка, букв сбить текстов меня эта текст моей наш имени дорогу свой семантика жизни, пунктуация осталось ведущими текста буквоград выйти. Встретил снова возвращайся выйти прямо гор запятой великий своего продолжил семантика текстов большой заголовок коварный, злых языком точках не бросил подпоясал эта на берегу они послушавшись знаках? Свой прямо если текстами бросил своего назад, запятых свою образ города лучше снова сбить силуэт однажды меня одна свое, взгляд имеет.</p>
+					</div>
+				</div>
+			</div>
+			<div id="details_hike2">
+				<h4>Поход 2</h4>
+				<div class="details_content">
+					<img class="lazy" src="/" data-src="img/image.png" alt="">
+					<div class="desc">
+						<p>Краткое описание второго похода со ссылками и картинками</p>
+						<p>Языком буквенных взобравшись текстами щеке проектах однажды речью, агентство, несколько, путь это маленький. Скатился грамматики силуэт путь над бросил жизни напоивший, от всех власти пояс то ему, встретил своих? Над города, обеспечивает имени себя строчка домах она снова по всей страна залетают послушавшись буквенных, моей вопроса приставка напоивший безорфографичный, взгляд? Встретил своего которой, семь использовало за запятой дорогу продолжил безопасную выйти оксмокс журчит ее эта, имеет живет?</p>
+					</div>
+				</div>
+			</div>
+			<div id="details_hike3">
+				<h4>Поход 3</h4>
+				<div class="details_content">
+					<img class="lazy" src="/" data-src="img/image.png" alt="">
+					<div class="desc">
+						<p>Краткое описание третьего похода со ссылками и картинками</p>
+						<p>Имеет власти собрал взгляд ручеек все правилами осталось парадигматическая, вопроса свой составитель, мир журчит языком рекламных! Что, взобравшись. Заманивший щеке себя то текст что живет снова взгляд, толку путь маленькая, языкового переписали рыбными рукопись дал, собрал текстами образ взобравшись послушавшись. Которой осталось подзаголовок моей родного семь пустился знаках текстов семантика она своего о букв что всеми великий буквоград, одна, даль первую наш обеспечивает. До журчит осталось заголовок, парадигматическая предложения точках первую своего, все речью мир инициал безорфографичный текст над толку составитель жизни на берегу! Реторический парадигматическая первую дорогу но буквоград если сбить использовало выйти океана собрал заманивший, все по всей которое вдали инициал, путь взобравшись. То раз рот это семь наш толку, страна большой диких, океана lorem за своего продолжил заманивший, дороге вдали предложения рыбного снова власти если? О журчит скатился, текстами деревни великий текстов на берегу точках диких имеет, которое прямо, все ты рыбными имени вопрос моей рыбного океана вопроса дорогу даже всеми по всей? Свой взобравшись составитель послушавшись. Инициал собрал страну продолжил, меня скатился правилами вопроса города пояс агентство эта то имени коварный. Ручеек, жаренные проектах океана подзаголовок дал гор грамматики заголовок большого, одна эта он наш, себя вскоре щеке текст составитель? Парадигматическая, жизни имени необходимыми алфавит заманивший взобравшись, переписали рот родного наш от всех букв, своих меня! По всей, он. Все пустился, маленький безопасную всеми подпоясал взобравшись домах ты рекламных они снова лучше то рукописи? Свой, на берегу всемогущая последний над осталось маленький. Залетают ведущими, заголовок текстов рукописи однажды рыбными, решила, бросил его всеми но ты над первую предложения ему вопроса! Большой лучше текст ее заглавных, страну составитель встретил подпоясал! Дорогу текстами грамматики страну журчит прямо ему, не, вдали маленькая языком имеет вскоре своего повстречался мир. Букв страна рекламных океана маленькая текст рукописи путь большого ручеек, это знаках страну скатился. Запятой гор несколько знаках толку буквоград семантика вдали единственное живет предупреждал пор коварных использовало до заголовок встретил от всех большой, приставка необходимыми курсивных, мир правилами океана образ! Выйти, то ручеек ты пунктуация до, наш заглавных ее осталось приставка меня всемогущая, вдали назад которой свою? Ее залетают большого необходимыми осталось взгляд курсивных? Сбить, о лучше? Вопрос первую подзаголовок это пор продолжил осталось путь, безорфографичный, одна текстов необходимыми моей. Предупредила свое приставка толку назад точках все знаках одна за моей то что предложения необходимыми, парадигматическая заголовок если переписывается свой ведущими сих букв текстами текст дал подпоясал власти. Встретил обеспечивает одна языком злых алфавит домах текстами первую взобравшись страна то, продолжил ведущими вдали если? Грустный то диких за вопрос, языком рекламных? Подпоясал дороге лучше бросил своего живет свое свой от всех!</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script src="js/common.js"></script>
+
+</body>
+</html>
