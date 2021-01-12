@@ -311,10 +311,10 @@ function FKPcountdown(options) {
 		this.canAnimate = ("classList" in divTest) &&
 					  typeof divTest.style.transition !== undefined;
 
-		this.show = function(el, name, display){
+		this.show = function(el, name){
 			name = name || 'fkp';
 			if(!this.canAnimate){
-				_show(el, display);
+				_show(el);
 			}
 
 			if(!_isHidden(el)){
@@ -328,7 +328,7 @@ function FKPcountdown(options) {
 				_.removeClasses(el, classNames.in);
 			});
 
-			_show(el, display);
+			_show(el);
 			_.addClasses(el, classNames.in);
 		}
 
@@ -352,10 +352,10 @@ function FKPcountdown(options) {
 			_.addClasses(el, classNames.out);
 		}
 
-		this.toggle = function(el, name, display){
+		this.toggle = function(el, name){
 
 			if(_isHidden(el)){
-				this.show(el, name, display);
+				this.show(el, name);
 			} else {
 				this.hide(el, name);
 			}
@@ -382,12 +382,11 @@ function FKPcountdown(options) {
 			el.style.display = 'none';
 		}
 
-		function _show(el, display){
+		function _show(el){
 			el.style.removeProperty('display');
 			
 			if(_isHidden(el)){
-				// var value = display ? display : 'block';
-				el.style.display = display || 'block';
+				el.style.display = 'block';
 			}
 		}
 
@@ -1066,21 +1065,21 @@ function _menu(wrapper) {
 
 	toggle.addEventListener('click', function() {
 		_.toggleClasses(icon, 'hamb');
-		_showHide.toggle(list, 'fkp_menu', 'flex');
+		_showHide.toggle(list, 'fkp_hinge');
 	});
 
-	// var mql = window.matchMedia('screen and (max-width: 767px)');
-	// mql.addListener(function(){
-	// 	if (!mql.matches) {
-	// 		list.removeAttribute('style');
-	// 		icon.classList.add('hamb');
-	// 	};
-	// });
+	var mql = window.matchMedia('screen and (max-width: 767px)');
+	mql.addListener(function(){
+		if (!mql.matches) {
+			list.removeAttribute('style');
+			icon.classList.add('hamb');
+		};
+	});
 		
 	for(var i = 0; i < links.length; i++) {
 		links[i].addEventListener('click', function(e) {
 			// e.preventDefault();
-			// _showHide.hide(list, 'fkp_menu');
+			// _showHide.hide(list, 'fkp_hinge');
 			list.removeAttribute('style');
 			icon.classList.add('hamb');
 			showSection(this.getAttribute('data-href'));
@@ -4924,7 +4923,7 @@ window.addEventListener('load',function(){
 
 	//////////////////-- Menu --//////////////////
 
-	_menu(document.querySelector('.menu_scroll'));
+	_menu(document.querySelector('.menu'));
 
 	//////////////////-- Button up --//////////////////
 
@@ -4956,15 +4955,15 @@ window.addEventListener('load',function(){
 	//////////////////-- LAZY LOAD --//////////////////
 
 	lightGallery(document.querySelector('.photo_list'), {
-		// share: true,
-		// rotate: true,
-		// rotateLeft: true,
+		share: true,
+		rotate: true,
+		rotateLeft: true,
 		mode: 'lg-soft-zoom',
 		speed: 500,
 		backdropDuration: 500,
 		hideBarsDelay: 1000,
 		closable: false,
-		// slideEndAnimatoin: false,
+		slideEndAnimatoin: false,
 		// thumbnail: false,
 		// showThumbByDefault: false,
 		autoplay: false,
